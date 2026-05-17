@@ -1,0 +1,38 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "password-strength-auditor"
+version = "0.1.0"
+description = "Score password strength and privately check it against real-world breaches via the HIBP k-anonymity model."
+requires-python = ">=3.13"
+license = { text = "MIT" }
+authors = [{ name = "Sarthak Aggarwal" }]
+dependencies = [
+    "zxcvbn>=4.5.0",
+    "requests>=2.32",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8",
+    "ruff>=0.6",
+    "responses>=0.25",
+]
+
+[project.scripts]
+pwaudit = "pwaudit.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["pwaudit"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py313"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

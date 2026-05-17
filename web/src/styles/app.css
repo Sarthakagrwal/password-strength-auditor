@@ -1,0 +1,244 @@
+/* ============================================================
+   PassSentinel — project-specific styles
+   Builds on the shared design system in theme.css.
+   ============================================================ */
+
+/* --- Page rhythm --- */
+main.wrap {
+  padding-top: var(--sp-6);
+  padding-bottom: var(--sp-6);
+}
+
+.hero--compact {
+  padding: var(--sp-7) 0 var(--sp-5);
+}
+.hero--compact h1 {
+  font-size: 2.1rem;
+}
+
+/* --- The auditor card --- */
+.auditor {
+  display: grid;
+  gap: var(--sp-5);
+}
+
+/* --- Password input with show/hide toggle --- */
+.pw-input {
+  position: relative;
+}
+.pw-input input {
+  padding-right: 92px;
+}
+.pw-input__toggle {
+  position: absolute;
+  top: 50%;
+  right: var(--sp-2);
+  transform: translateY(-50%);
+}
+
+/* --- Strength meter header row --- */
+.meter-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: var(--sp-2);
+}
+.meter-label {
+  font-weight: 650;
+  font-size: 1.05rem;
+}
+.meter-label--safe {
+  color: var(--safe);
+}
+.meter-label--warn {
+  color: var(--warn);
+}
+.meter-label--danger {
+  color: var(--danger);
+}
+.meter-label--idle {
+  color: var(--text-dim);
+}
+
+/* --- Crack-time grid --- */
+.crack-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sp-3);
+}
+@media (max-width: 560px) {
+  .crack-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.crack-cell {
+  background: var(--panel-2);
+  border: 1px solid var(--border-mut);
+  border-radius: var(--radius-sm);
+  padding: var(--sp-3) var(--sp-4);
+}
+.crack-cell__scenario {
+  color: var(--text-mut);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.crack-cell__value {
+  font-family: var(--font-mono);
+  font-size: 1.05rem;
+  font-weight: 650;
+  margin-top: 2px;
+}
+
+/* --- Estimate comparison (naive vs zxcvbn) --- */
+.estimates {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sp-3);
+}
+@media (max-width: 560px) {
+  .estimates {
+    grid-template-columns: 1fr;
+  }
+}
+.estimate {
+  background: var(--panel-2);
+  border: 1px solid var(--border-mut);
+  border-radius: var(--radius-sm);
+  padding: var(--sp-4);
+}
+.estimate__label {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-mut);
+}
+.estimate__value {
+  font-family: var(--font-mono);
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: var(--sp-1) 0;
+}
+.estimate__note {
+  font-size: 0.82rem;
+  color: var(--text-dim);
+}
+
+/* --- Feedback (zxcvbn warning + suggestions) --- */
+.feedback__warning {
+  display: flex;
+  gap: var(--sp-2);
+  align-items: flex-start;
+  font-weight: 600;
+  color: var(--warn);
+}
+.feedback ul {
+  list-style: none;
+  margin-top: var(--sp-2);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-1);
+}
+.feedback ul li {
+  color: var(--text-mut);
+  font-size: 0.92rem;
+  padding-left: var(--sp-4);
+  position: relative;
+}
+.feedback ul li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--accent-2);
+}
+
+/* --- Breach result --- */
+.breach-result {
+  display: flex;
+  gap: var(--sp-3);
+  align-items: center;
+  padding: var(--sp-4) var(--sp-5);
+  border: 1px solid var(--border);
+  border-left-width: 4px;
+  border-radius: var(--radius);
+}
+.breach-result--safe {
+  background: var(--safe-bg);
+  border-color: var(--safe-bord);
+}
+.breach-result--danger {
+  background: var(--danger-bg);
+  border-color: var(--danger-bord);
+}
+.breach-result--neutral {
+  background: var(--panel-2);
+  border-color: var(--border);
+}
+.breach-result__icon {
+  font-size: 1.4rem;
+  line-height: 1;
+}
+.breach-result__text strong {
+  display: block;
+  font-size: 1.02rem;
+}
+.breach-result__text span {
+  color: var(--text-mut);
+  font-size: 0.88rem;
+}
+
+/* --- Empty / idle states --- */
+.idle-hint {
+  color: var(--text-dim);
+  font-size: 0.92rem;
+}
+
+/* --- "How it works" explainer cards --- */
+.explainer-step {
+  display: flex;
+  gap: var(--sp-4);
+  align-items: flex-start;
+}
+.explainer-step__num {
+  flex: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  background: var(--accent-soft);
+  color: var(--accent-2);
+  border: 1px solid var(--border);
+}
+.explainer-step__body h3 {
+  font-size: 0.98rem;
+  margin-bottom: 2px;
+}
+.explainer-step__body p {
+  color: var(--text-mut);
+  font-size: 0.9rem;
+}
+
+/* --- Footer brand mark --- */
+.footer-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2) var(--sp-5);
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* --- Visually-hidden helper for accessible labels --- */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

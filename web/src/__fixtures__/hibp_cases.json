@@ -1,0 +1,50 @@
+{
+  "_comment": "Crafted HIBP range-API fixtures for deterministic offline tests. Each case gives a password, its real uppercase SHA-1 prefix/suffix, a synthetic range-API response body, and the breach count the parser must extract.",
+  "cases": [
+    {
+      "name": "breached password — suffix present with a real count",
+      "password": "password",
+      "prefix": "5BAA6",
+      "suffix": "1E4C9B93F3F0682250B6CF8331B7EE68FD8",
+      "responseBody": "0018A45C4D1DEF81644B54AB7F969B88D65:1\n00D4F6E8FA6EECAD2A3AA415EEC418D38EC:2\n1E4C9B93F3F0682250B6CF8331B7EE68FD8:9659365\n011053FD0102E94D6AE2F8B83D76FAF94F6:1\n",
+      "expectedCount": 9659365,
+      "expectedBreached": true
+    },
+    {
+      "name": "not breached — suffix absent from the list",
+      "password": "correct horse battery staple xyzzy42",
+      "prefix": "623F0",
+      "suffix": "00A994BAAF1BB53C0E5E42B34C35AA80D7F",
+      "responseBody": "0018A45C4D1DEF81644B54AB7F969B88D65:3\n00D4F6E8FA6EECAD2A3AA415EEC418D38EC:7\nFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF:2\n",
+      "expectedCount": 0,
+      "expectedBreached": false
+    },
+    {
+      "name": "padding lines (count 0) must be ignored even if suffix matches",
+      "password": "hunter2",
+      "prefix": "F3BBB",
+      "suffix": "D66A63D4BF1747940578EC3D0103530E21D",
+      "responseBody": "D66A63D4BF1747940578EC3D0103530E21D:0\n0018A45C4D1DEF81644B54AB7F969B88D65:0\n00D4F6E8FA6EECAD2A3AA415EEC418D38EC:0\nAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA:0\n",
+      "expectedCount": 0,
+      "expectedBreached": false
+    },
+    {
+      "name": "breached among padding — only the non-zero matching row counts",
+      "password": "hunter2",
+      "prefix": "F3BBB",
+      "suffix": "D66A63D4BF1747940578EC3D0103530E21D",
+      "responseBody": "0018A45C4D1DEF81644B54AB7F969B88D65:0\nD66A63D4BF1747940578EC3D0103530E21D:24230\n00D4F6E8FA6EECAD2A3AA415EEC418D38EC:0\n",
+      "expectedCount": 24230,
+      "expectedBreached": true
+    },
+    {
+      "name": "case-insensitive suffix match (server returns lowercase)",
+      "password": "password",
+      "prefix": "5BAA6",
+      "suffix": "1E4C9B93F3F0682250B6CF8331B7EE68FD8",
+      "responseBody": "1e4c9b93f3f0682250b6cf8331b7ee68fd8:42\n",
+      "expectedCount": 42,
+      "expectedBreached": true
+    }
+  ]
+}
